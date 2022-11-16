@@ -2,3 +2,4 @@
 **/yarn
 .yarn
 .vscode/
+**/dist
