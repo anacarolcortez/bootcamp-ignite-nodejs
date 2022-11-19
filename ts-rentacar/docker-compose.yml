@@ -1,9 +1,35 @@
 version: "3.7"
 
 services:
+  database_rentacar:
+    image: postgres
+    container_name: database_rentacar
+    restart: always
+    ports: ["5432:5432"]
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=tester
+      - POSTGRES_DB=rentacar
+    volumes:
+      - pgdata:/data/postgres
+    networks:
+      - rentacar_network
   app:
     build: .
     container_name: rentacar
+    restart: always
     ports: ["3333:3333"]
     volumes:
       - .:/user/app
+    networks:
+      - rentacar_network
+    links:
+      - database_rentacar
+    depends_on:
+      - database_rentacar
+volumes:
+  pgdata:
+    driver: local
+networks:
+  rentacar_network:
+    driver: bridge
