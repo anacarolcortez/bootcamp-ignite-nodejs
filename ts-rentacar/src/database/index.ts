@@ -6,7 +6,7 @@ const AppDataSource = new DataSource({
     port: 5432,
     username: "docker",
     password: "tester",
-    database: "rentacar",
+    database: "db_rentacar",
 })
 
 AppDataSource.initialize()
