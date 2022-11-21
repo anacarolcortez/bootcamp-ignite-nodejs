@@ -2,8 +2,9 @@ import { CategoriesRepository } from "../../repositories/implementations/Categor
 import { UploadCategoryController } from "./UploadCategoryController";
 import { UploadCategoryUseCase } from "./UploadCategoryUseCase";
 
-const categoriesRepository = CategoriesRepository.getInstance()
-const uploadCategoryUseCase = new UploadCategoryUseCase(categoriesRepository)
-const uploadCategoryController = new UploadCategoryController(uploadCategoryUseCase)
-
-export { uploadCategoryController }
+export default (): UploadCategoryController => {
+    const categoriesRepository = new CategoriesRepository()
+    const uploadCategoryUseCase = new UploadCategoryUseCase(categoriesRepository)
+    const uploadCategoryController = new UploadCategoryController(uploadCategoryUseCase)
+    return uploadCategoryController
+}
